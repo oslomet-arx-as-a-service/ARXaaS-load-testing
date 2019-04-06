@@ -1,0 +1,7 @@
+Oslo,"{Oslo, Bergen}","{Oslo, Bergen, London, Moscow}",*
+Bergen,"{Oslo, Bergen}","{Oslo, Bergen, London, Moscow}",*
+London,"{London, Moscow}","{Oslo, Bergen, London, Moscow}",*
+Moscow,"{London, Moscow}","{Oslo, Bergen, London, Moscow}",*
+Bejing,"{Bejing, Tokyo}","{Bejing, Tokyo, Miami}",*
+Tokyo,"{Bejing, Tokyo}","{Bejing, Tokyo, Miami}",*
+Miami,{Miami},"{Bejing, Tokyo, Miami}",*
