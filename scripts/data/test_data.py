@@ -10,6 +10,7 @@ import pandas
 
 module_dir = __file__
 
+
 def dummy_dataset():
     df = pandas.read_csv("scripts/data/dummy-dataset-260219.csv", sep=";")
     dataset = Dataset.from_pandas(df)

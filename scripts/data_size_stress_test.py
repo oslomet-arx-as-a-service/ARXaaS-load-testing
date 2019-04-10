@@ -14,6 +14,10 @@ def test_dataset(n):
     return test_data.dummy_dataset_double_n_times(n)
 
 
+def test_window_dataset(row, column):
+    return test_data.generate_dataset(row, column)
+
+
 def anonymize(dataset):
     res = con.anonymize(dataset, [KAnonymity(4)])
     assert res.anonymization_status == "ANONYMOUS"
@@ -44,3 +48,15 @@ def dummy_data_analyze_stress_test(batch_sizes):
                                      number=1)
         result[str(batch * 5000)] = elapsed_time
     return result
+
+
+def dataset_window_analyze_stress_test(shapes: list):
+    result = {}
+    for shape in shapes:
+        elapsed_time = timeit.timeit(f"analyze(dataset)",
+                                     setup=f"dataset = test_window_dataset({shape[0]},{shape[1]})",
+                                     globals=globals(),
+                                     number=1)
+        result[str(shape[0])+"x"+str(shape[1])] = elapsed_time
+    return result
+
