@@ -1,4 +1,6 @@
 import string
+from pathlib import Path
+
 import pandas as pd
 from pyaaas.models.attribute_type import AttributeType
 from pyaaas.models.dataset import Dataset
@@ -6,6 +8,7 @@ from pyaaas.models import request_builder
 import random
 import pandas
 
+module_dir = __file__
 
 def dummy_dataset():
     df = pandas.read_csv("scripts/data/dummy-dataset-260219.csv", sep=";")
@@ -35,7 +38,9 @@ def dummy_dataset():
 
 
 def dummy_dataset_double_n_times(n):
-    df = pandas.read_csv("scripts/data/dummy-dataset-260219.csv", sep=";")
+    hierarchies_dir = Path(__file__).parent.joinpath("hierarchies")
+    csv_file = Path(__file__).parent.joinpath("dummy-dataset-260219.csv")
+    df = pandas.read_csv(csv_file, sep=";")
     df = pandas.concat([df] * n)
     dataset = Dataset.from_pandas(df)
     dataset.set_attributes(['Dummy_tag',
@@ -49,11 +54,11 @@ def dummy_dataset_double_n_times(n):
                             'Medisinsk forhold'],
                            AttributeType.IDENTIFYING)
 
-    ytelse_hierarchy = pd.read_csv("scripts/data/hierarchies/Ytelse_hierarchy.csv", sep=";", header=None)
-    innsatsgruppe_hierarchy = pd.read_csv("scripts/data/hierarchies/innsatsgruppe_hierarchy.csv", sep=";", header=None)
-    innvandrerbakgrunn_hierarchy = pd.read_csv("scripts/data/hierarchies/innvandrerbakgrunn_hierarchy.csv", sep=";",
+    ytelse_hierarchy = pd.read_csv(hierarchies_dir.joinpath("Ytelse_hierarchy.csv"), sep=";", header=None)
+    innsatsgruppe_hierarchy = pd.read_csv(hierarchies_dir.joinpath("innsatsgruppe_hierarchy.csv"), sep=";", header=None)
+    innvandrerbakgrunn_hierarchy = pd.read_csv(hierarchies_dir.joinpath("innvandrerbakgrunn_hierarchy.csv"), sep=";",
                                                header=None)
-    ledighetsstatus_hierarchy = pd.read_csv("scripts/data/hierarchies/ledighetsstatus_hierarchy.csv", sep=";", header=None)
+    ledighetsstatus_hierarchy = pd.read_csv(hierarchies_dir.joinpath("ledighetsstatus_hierarchy.csv"), sep=";", header=None)
     dataset.set_hierarchy('Ytelse', ytelse_hierarchy)
     dataset.set_hierarchy("Innsatsgruppe", innsatsgruppe_hierarchy)
     dataset.set_hierarchy("Innvandrerbakgrunn", innvandrerbakgrunn_hierarchy)
@@ -89,10 +94,10 @@ def test_dataset(row_count):
     return raw_data
 
 
-def random_string(stringLength=10):
+def random_string(string_length=10):
     """Generate a random string of fixed length """
     letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(stringLength))
+    return ''.join(random.choice(letters) for i in range(string_length))
 
 
 def generate_genders():
