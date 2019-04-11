@@ -4,7 +4,6 @@ from pathlib import Path
 import pandas as pd
 from pyaaas.models.attribute_type import AttributeType
 from pyaaas.models.dataset import Dataset
-from pyaaas.models import request_builder
 import random
 import pandas
 

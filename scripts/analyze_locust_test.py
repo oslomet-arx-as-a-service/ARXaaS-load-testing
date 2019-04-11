@@ -4,7 +4,7 @@ from pyaaas.models.request_builder import RequestBuilder
 
 
 def analyze_request_content():
-    dataset = test_data.dummy_dataset_double_n_times(10)
+    dataset = test_data.dummy_dataset_double_n_times(100)
     request = RequestBuilder(dataset).build_analyze_request()
     return request
 
@@ -16,7 +16,7 @@ class UserBehavior(TaskSet):
 
     @task(1)
     def analyze(self):
-        self.client.post("/api/analyze", json=request)
+        self.client.post("/api/analyze", json=request, verify=False)
 
 
 class WebsiteUser(HttpLocust):
