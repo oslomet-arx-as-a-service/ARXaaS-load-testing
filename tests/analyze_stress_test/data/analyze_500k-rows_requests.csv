@@ -1,0 +1,3 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"POST","/api/analyze",4,0,11000,11459,10802,12146,3216,0.17
+"None","Total",4,0,11000,11459,10802,12146,3216,0.17

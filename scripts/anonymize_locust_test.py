@@ -6,7 +6,7 @@ from pyaaas.models.privacy_models import KAnonymity
 
 def anonymize_request_content():
     kanon = KAnonymity(4)
-    dataset = test_data.dummy_dataset_double_n_times(10)
+    dataset = test_data.dummy_dataset_double_n_times(300)
     request = request_builder.RequestBuilder(dataset).add_privacy_model(kanon).build_anonymize_request()
     return request
 
@@ -18,10 +18,10 @@ class UserBehavior(TaskSet):
 
     @task(1)
     def analyze(self):
-        self.client.post("/api/anonymize", json=request)
+        self.client.post("/api/anonymize", json=request, verify=False)
 
 
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior
-    min_wait = 1000
+    min_wait = 500
     max_wait = 1000
